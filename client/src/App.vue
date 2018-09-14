@@ -1,17 +1,14 @@
 <template>
   <v-app>
     <main-navigation></main-navigation>
-    <v-content>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
+    <main-content></main-content>
     <v-footer app></v-footer>
   </v-app>
 </template>
 <script>
 
 import MainNavigation from './components/elements/MainNavigation.vue'
+import MainContent from './components/elements/MainContent.vue'
 
 export default {
   name: 'App',
@@ -19,6 +16,7 @@ export default {
 
   }),
   components: {
+    'main-content': MainContent,
     'main-navigation': MainNavigation
   }
 }

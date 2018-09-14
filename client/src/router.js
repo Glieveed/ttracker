@@ -5,6 +5,7 @@ import Router from 'vue-router'
 
 const HomeView = () => import('./views/HomeView.vue')
 const ProjectsView = () => import('./views/ProjectsView.vue')
+const ProfileView = () => import('./views/ProfileView.vue')
 
 Vue.use(Router)
 
@@ -13,14 +14,25 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      name: 'Home',
+      name: 'Главная',
       path: '/',
-      component: HomeView
+      component: HomeView,
+      icon: 'home',
+      group: 'main'
     },
     {
-      name: 'Projects',
+      name: 'Проекты',
       path: '/projects',
-      component: ProjectsView
+      component: ProjectsView,
+      icon: 'folder_open',
+      group: 'main'
+    },
+    {
+      name: 'Профиль',
+      path: '/profile',
+      component: ProfileView,
+      icon: 'face',
+      group: 'info'
     }
   ]
 })
