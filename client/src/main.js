@@ -4,8 +4,11 @@ import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueDragDrop from 'vue-drag-drop'
 
 Vue.config.productionTip = false
+
+Vue.use(VueDragDrop)
 
 new Vue({
   router,

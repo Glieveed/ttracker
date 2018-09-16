@@ -10,20 +10,24 @@
             <v-list>
               <v-list-group v-for='(navigationGroupItem, index) in groupsList' :key='`navigation-group-item-${index}`'>
                 <v-list-tile slot='activator'>
-                  <v-list-tile-content class='group-title'>
-                    <v-list-tile-action>
-                      <v-icon>{{ navigationGroupItem.icon }}</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-title>{{ navigationGroupItem.name }}</v-list-tile-title>
-                  </v-list-tile-content>
+                  <v-layout >
+                    <v-list-tile-content class='group-title'>
+                      <v-flex d-flex row>
+                        <v-list-tile-action>
+                          <v-icon>{{ navigationGroupItem.icon }}</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-title>{{ navigationGroupItem.name }}</v-list-tile-title>
+                      </v-flex>
+                    </v-list-tile-content>
+                  </v-layout>
                 </v-list-tile>
-                <v-list-tile v-for='(navigationItem, index) in navigationGroupItem.items' :key='`navigation-item-${index}`'>
-                  <router-link class='router-link' :to='navigationItem.path'>
+                <v-list-tile :to='navigationItem.path' d-inline-flex v-for='(navigationItem, index) in navigationGroupItem.items' :key='`navigation-item-${index}`'  class='white--text'>
+                  <v-flex d-flex row pl-3>
                     <v-list-tile-action>
                       <v-icon class='router-link-icon'> {{ navigationItem.icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-sub-title>{{ navigationItem.name }}</v-list-tile-sub-title>
-                  </router-link>
+                  </v-flex>
                 </v-list-tile>
               </v-list-group>
             </v-list>
@@ -56,12 +60,10 @@ export default {
   computed: {
     getNavigationList() {
       this.routesList.forEach((item) => {
-      if (!this.groupsList[item.group].items.includes(item)) {
-        this.groupsList[item.group].items.push(item) 
-      }
-
+        if (!this.groupsList[item.group].items.includes(item)) {
+          this.groupsList[item.group].items.push(item) 
+        }
       })
-      console.log(this.groupsList)
       return this.groupsList
     }
   },
@@ -74,40 +76,5 @@ export default {
 
 </script>
 <style lang='scss' scoped>
-  .v-list__group__header {
-    padding: 0 16px;
-    width:100%;
-  }
 
-  .group-title {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .router-link {
-    width: 100%;
-    color: #333;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: flex-start;
-    text-decoration: none;
-
-    .v-list__tile__action {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .router-link-icon {
-
-    }
-  }
-
-  .router-link:hover .v-list__tile__sub-title, .router-link:hover .router-link-icon{
-    color: #1976d2;
-  }
-</style>
+</style> 
