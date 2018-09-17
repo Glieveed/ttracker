@@ -1,5 +1,7 @@
 <template>
-  <div>Home!</div>
+  <v-flex fill-height column align-items-start justify-content-start>
+    
+  </v-flex>
 </template>
 <script>
 

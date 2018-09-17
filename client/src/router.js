@@ -5,6 +5,7 @@ import Router from 'vue-router'
 
 const HomeView = () => import('./views/HomeView.vue')
 const ProjectsView = () => import('./views/ProjectsView.vue')
+const BoardView = () => import('./views/BoardView.vue')
 const ProfileView = () => import('./views/ProfileView.vue')
 
 Vue.use(Router)
@@ -24,6 +25,13 @@ export default new Router({
       name: 'Проекты',
       path: '/projects',
       component: ProjectsView,
+      icon: 'folder_open',
+      group: 'main'
+    },
+    {
+      name: 'Доска',
+      path: '/board',
+      component: BoardView,
       icon: 'folder_open',
       group: 'main'
     },
