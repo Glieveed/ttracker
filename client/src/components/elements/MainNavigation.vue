@@ -60,9 +60,12 @@ export default {
   computed: {
     getNavigationList() {
       this.routesList.forEach((item) => {
-        if (!this.groupsList[item.group].items.includes(item)) {
-          this.groupsList[item.group].items.push(item) 
+        if (item.group && item.group.length > 0) {
+          if (!this.groupsList[item.group].items.includes(item)) {
+            this.groupsList[item.group].items.push(item) 
+          }
         }
+
       })
       return this.groupsList
     }

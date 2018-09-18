@@ -37,7 +37,7 @@ export default {
     isOver: false
   }),
   created() {
-
+    this.$store.dispatch('getColumns')
   },
   components: {
     'create-card-component': CreateCardComponent,

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 // Components 
 
+const RegistrationView = () => import('./views/RegistrationView')
 const HomeView = () => import('./views/HomeView.vue')
 const ProjectsView = () => import('./views/ProjectsView.vue')
 const BoardView = () => import('./views/BoardView.vue')
@@ -14,6 +15,11 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      name: 'Регистрация',
+      path: '/registration',
+      component: RegistrationView
+    },
     {
       name: 'Главная',
       path: '/',
