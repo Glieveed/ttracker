@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   res.status(200).sendFile('index.html')
 })
 
-const boardData = [
+let boardData = [
   {
     id: 1,
     name: 'Планы/Идеи',
@@ -63,15 +63,33 @@ const boardData = [
 ]
 
 app.get('/board', (req, res) => {
-  res.status(200).send(boardData)
+  res.status(200).json({
+    success: true,
+    boardData
+  })
 })
 
-app.get('/board/addColumn', (req, res) => {
-  console.log('ADD COLUMN: ' + req)
+app.post('/board/addColumn', (req, res) => {
+  console.log(req.body.column)
+  if (req.body) {
+    console.log(req.body.column)
+    boardData.push(req.body.column)
+    res.status(200).json({
+      success: true,
+      boardData
+    })
+
+  }
 })
 
 app.post('/board/addCard', (req, res) => {
-  res.status(200).json(req.body)
+  //boardData[req.body.toColumnIndex].cards.push(req.body.newCard)
+  boardData[req.body.toColumnIndex].cards.push(req.body.newCard)
+  res.status(200).json({
+    success: true,
+    boardData
+  })
+  //console.log(req.body)
   //res.status(200).send(boardData)
 })
 

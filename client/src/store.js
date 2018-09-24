@@ -101,20 +101,48 @@ export default new Vuex.Store({
   actions: {
     getColumns(context, payload) {
       axios.get(apiUrl + '/board').then((response) => {
-        context.state.gridColumns = response.data
+        console.log(response.data)
+        if (response.data.success) {
+          context.state.gridColumns = response.data.boardData
+        } else {
+          context.state.gridColumns = []
+        }
+
+        return context.state.gridColumns
       })
     },
     addNewCardHandler(context, payload) {
-      axios.post(apiUrl + '/board/addCard', {
-        body: payload.newCard
-      }).then((response) => {
-        console.log(response.data)
+      let allColumns = context.state.gridColumns
+      let allCardsIds = []
+      let maxCardId
+      allColumns.forEach((item) => {
+       item.cards.forEach((item) => {
+         allCardsIds.push(item.id)
+        })
+      })
+
+      maxCardId = Math.max.apply(null, allCardsIds) + 1
+      payload.newCard.id = maxCardId
+
+      axios.post(apiUrl + '/board/addCard', {newCard: payload.newCard, toColumn: payload.column, toColumnIndex: payload.indexColumn}).then((response) => {
+        context.state.gridColumns = response.data.boardData
       })
       //context.state.gridColumns[payload.indexColumn].cards.push(payload.newCard)
     },
     addNewColumnHandler(context, payload) {
-      axios.get(apiUrl + '/board/addColumn').then((response) => {
-        console.log(response.data)
+      let currentColumns = context.state.gridColumns
+      let currentColumnsLastIndex = currentColumns[currentColumns.length - 1] ? parseInt(currentColumns[currentColumns.length - 1].id) + 1 : 0 
+      axios.post(apiUrl + '/board/addColumn', {
+        column: {
+          name: payload.columnName, 
+          id: currentColumnsLastIndex, 
+          cards: []
+        }
+      }).then((response) => {
+        if (response.data.success) {
+          context.state.gridColumns = response.data.boardData
+          currentColumnsLastIndex++
+        }
       })
       //context.state.gridColumns.push({ name: payload.columnName, cards: []})
     }

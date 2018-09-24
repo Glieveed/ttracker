@@ -8,7 +8,7 @@
       </v-card>
       <create-card-component :column='column' :indexColumn='indexColumn'></create-card-component>
       <v-flex column class='cards-list'>
-        <drop class='drop' @drop='droped(column, indexColumn, ...arguments)' :class='{over: isOver}' @dragover='dragOver(column, indexColumn, ...arguments)'  @dragleave='dragLeave(column, indexColumn, ...arguments)'>
+        <drop class='drop' @drop.self='droped(column, indexColumn, ...arguments)' :class='{over: isOver}' @dragover.self='dragOver(column, indexColumn, ...arguments)'  @dragleave.self='dragLeave(column, indexColumn, ...arguments)'>
           <drag class='drag' v-for='(card, indexCard) in column.cards' drop-effect='move' :effect-allowed='["move"]' :key='`card-${indexCard}`'  @dragstart='dragStart(column, indexColumn, indexCard, ...arguments)'  @dragend='dragEnd(column, indexColumn, indexCard, ...arguments)' :transfer-data='{column, indexColumn, card}'>
             <card-component  :column='column' :card='card'></card-component>
           </drag>
